@@ -146,12 +146,12 @@ class UserServiceImplTest {
         var uuid = UUID.randomUUID();
 
         doNothing().when(this.userRepository)
-                .deleteUserByID(uuid);
+                .deleteUserById(uuid);
 
         this.service.deleteUserByID(uuid);
 
         verify(this.userRepository, times(1))
-                .deleteUserByID(uuid);
+                .deleteUserById(uuid);
     }
 
 

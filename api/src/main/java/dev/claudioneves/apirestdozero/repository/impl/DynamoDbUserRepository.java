@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
-public class DynamodbUserRepository implements UserRepository {
+public class DynamoDbUserRepository implements UserRepository {
 
     private final DynamoDbClient dynamoDbClient;
 
@@ -85,7 +85,7 @@ public class DynamodbUserRepository implements UserRepository {
 
     }
 
-    public void deleteUserByID(UUID id) {
+    public void deleteUserById(UUID id) {
 
         var request = DeleteItemRequest.builder()
                 .tableName(tableName)
@@ -95,7 +95,6 @@ public class DynamodbUserRepository implements UserRepository {
         this.dynamoDbClient.deleteItem(request);
     }
 
-    @Override
     public User save(User user) {
         var record = Map.of(
                 "id", AttributeValue.builder().s(user.getId().toString()).build(),

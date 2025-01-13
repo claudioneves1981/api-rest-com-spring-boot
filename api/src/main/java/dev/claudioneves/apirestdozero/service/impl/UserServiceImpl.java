@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     public UserDTO getUserByID(UUID id) {
         var user = this.userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException());
+                .orElseThrow(UserNotFoundException::new);
 
         return new UserDTO(
 
@@ -60,13 +60,13 @@ public class UserServiceImpl implements UserService {
 
 
     public void deleteUserByID(UUID id) {
-        this.userRepository.deleteUserByID(id);
+        this.userRepository.deleteUserById(id);
 
     }
 
     public void updateUser(UUID id, String password){
         var user = this.userRepository.findById(id)
-                .orElseThrow(()-> new UserNotFoundException());
+                .orElseThrow(UserNotFoundException::new);
 
         var passwordEncoded = encoder.encode(password);
         user.setPassword(passwordEncoded);
